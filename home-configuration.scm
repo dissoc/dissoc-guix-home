@@ -9,6 +9,7 @@
              (gnu services)
              (guix gexp)
              (gnu home services desktop)
+             (gnu home services dotfiles)
              (gnu home services messaging)
              (gnu home services shells))
 
@@ -16,19 +17,20 @@
  ;; Below is the list of packages that will show up in your
  ;; Home profile, under ~/.guix-home/profile.
  (packages (specifications->packages
-            (list "openssl"
-                  "autorandr"
-                  "xournalpp"
-                  "xscreensaver"
-                  "emacs"
-                  "alacritty"
-                  "git"
-                  "ungoogled-chromium"
-                  "xterm"
-                  "arandr"
-                  "scrot"
-                  "sbcl"
-                  "bind:utils")))
+            (list
+             "alacritty"
+             "arandr"
+             "autorandr"
+             "bind:utils"
+             "emacs"
+             "git"
+             "openssl"
+             "sbcl"
+             "scrot"
+             "ungoogled-chromium"
+             "xournalpp"
+             "xscreensaver"
+             "xterm")))
 
  ;; Below is the list of Home services.  To search for available
  ;; services, run 'guix home search KEYWORD' in a terminal.
@@ -39,9 +41,11 @@
         (service home-unclutter-service-type)
         (service home-xmodmap-service-type
                  (home-xmodmap-configuration
-                  (key-map '(("remove Lock" . "Caps_Lock")
-                             ("remove Insert" . "Insert")))))
-
+                  (key-map '(("remove Lock" . "Caps_Lock")))))
+        (service home-dotfiles-service-type
+                 (home-dotfiles-configuration
+                  (source-directory "/home/dissoc/Workspace/dissoc-dotfiles/")
+                  (directories (list "guix" "stumpwm"))))
         ;; znc service will fail to start without a config
         ;; run 'znc --makeconfig' to generate a config file
         (service home-znc-service-type))))
