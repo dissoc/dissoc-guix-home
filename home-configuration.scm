@@ -8,6 +8,7 @@
              (gnu packages)
              (gnu services)
              (guix gexp)
+             (gnu home services desktop)
              (gnu home services messaging)
              (gnu home services shells))
 
@@ -38,7 +39,8 @@
         (service home-unclutter-service-type)
         (service home-xmodmap-service-type
                  (home-xmodmap-configuration
-                  (key-map '(("remove Lock" . "Caps_Lock")))))
+                  (key-map '(("remove Lock" . "Caps_Lock")
+                             ("remove Insert" . "Insert")))))
 
         ;; znc service will fail to start without a config
         ;; run 'znc --makeconfig' to generate a config file
