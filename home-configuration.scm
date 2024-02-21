@@ -8,6 +8,7 @@
              (gnu packages)
              (gnu services)
              (guix gexp)
+             (gnu home services)
              (gnu home services desktop)
              (gnu home services dotfiles)
              (gnu home services messaging)
@@ -46,6 +47,10 @@
                  (home-dotfiles-configuration
                   (source-directory "/home/dissoc/Workspace/dissoc-dotfiles/")
                   (directories (list "guix" "stumpwm"))))
+        (simple-service 'extra-env-vars
+                        home-environment-variables-service-type
+                        `(("EDITOR" . "emacs")
+                          ("VISUAL" . "emacs")))
         ;; znc service will fail to start without a config
         ;; run 'znc --makeconfig' to generate a config file
         (service home-znc-service-type))))
